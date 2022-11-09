@@ -24,9 +24,11 @@ public class MainServlet extends HttpServlet {
 		detailDAO DAO=detailDAO.getInstance();
 		
 		List<detailDTO> shortpage=DAO.selectShortpage();
+		List<detailDTO> details=DAO.selectAllDetail();
 		System.out.println("대분류 "+shortpage);
 		
 		request.setAttribute("shortpage", shortpage);
+		request.setAttribute("details",details);
 		RequestDispatcher dis=request.getRequestDispatcher("main.jsp");
 		dis.forward(request, response);
 	}

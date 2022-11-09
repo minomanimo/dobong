@@ -40,7 +40,7 @@
 	<%
 			if(m.getAdmin()==1){
 	%>
-			<a href="AdminServlet">관리자 페이지</a>
+			<a href="adminPage.jsp">관리자 페이지</a>
 	<%		
 			}
 		}

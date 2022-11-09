@@ -13,7 +13,12 @@
 		<table>
 			<c:forEach items="${shortpage }" var="shortpage"> 
 				<tr>
-					 <td> <a href="detailServlet?shortpage=${shortpage.getShortpage()}"> ${shortpage.getShortpage() } </a ></td>
+					 <td>${shortpage.getShortpage() }</td>
+					 <c:forEach items="${details }" var="details">
+					 	<c:if test="${shortpage.getShortpage() eq  details.getShortpage()}">
+					 		<td><a href="detailServlet?number=${details.getNumber() }">${details.getDetailpage() }</a></td>
+					 	</c:if>
+					 </c:forEach>
 				</tr>
 			</c:forEach>
 		</table>

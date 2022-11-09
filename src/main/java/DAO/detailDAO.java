@@ -118,7 +118,7 @@ public class detailDAO {
 			String param="%"+shortpage+"%";//이렇게 안하고 바로 like "스트링" 해도 충분히 검색됨!!
 			System.out.println(param);
 			String sql="select number,shortpage, detailpage, imageurl, textminning1, textminning2, textminning3, textminning4, api_latitude, api_longitude "
-					+ "from intropage where shortpage like ?";
+					+ "from intropage where number=?";
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;

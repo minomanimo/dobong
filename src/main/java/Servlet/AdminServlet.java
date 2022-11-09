@@ -31,7 +31,7 @@ public class AdminServlet extends HttpServlet {
 		
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("nOfPage", nOfPage);
-		RequestDispatcher dis=request.getRequestDispatcher("adminPage.jsp");
+		RequestDispatcher dis=request.getRequestDispatcher("members.jsp");
 		dis.forward(request, response);
 	}
 

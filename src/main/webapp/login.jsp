@@ -43,7 +43,7 @@
 		<div class="loginMenu">
 			<form action="LoginServlet" method="post">
 				<input type="text" name="id" placeholder="ID 입력"><br>
-				<input type="text" name="password" placeholder="비밀번호 입력"><br>
+				<input type="password" name="password" placeholder="비밀번호 입력"><br>
 				<input type="submit" value="로그인">
 			</form>
 		</div>

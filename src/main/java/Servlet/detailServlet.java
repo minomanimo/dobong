@@ -25,11 +25,11 @@ public class detailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-		String shortpage=request.getParameter("shortpage");
-		System.out.println("detail_Get 실행 "+shortpage);	//메인에서 오는 값을 확인함
+		String number=request.getParameter("number");
+		System.out.println("detail_Get 실행 "+number);	//메인에서 오는 값을 확인함
 		
 		detailDAO DAO=detailDAO.getInstance();
-		List<detailDTO> detail=DAO.selectDetailPage(shortpage); 
+		List<detailDTO> detail=DAO.selectDetailPage(number); 
 		System.out.println(detail+"큰 카테고리확인");	
 		
 		request.setAttribute("detail", detail);

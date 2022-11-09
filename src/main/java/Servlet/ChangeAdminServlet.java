@@ -16,11 +16,13 @@ public class ChangeAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		String id=request.getParameter("id");
 		int admin=Integer.parseInt(request.getParameter("admin"));
 		MemberDAO m=MemberDAO.getInstance();
 		m.changeAdmin(id,admin);
-		ArrayList<MemberDTO> mList=m.getAllMember();
+		ArrayList<MemberDTO> mList=m.getAllMember(1);
 		request.setAttribute("mList", mList);
 		request.getRequestDispatcher("adminPage.jsp").forward(request, response);
 	}
