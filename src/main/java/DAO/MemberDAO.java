@@ -157,16 +157,18 @@ public class MemberDAO {
 		//=====================		
 		//  관리자용 회원정보 조회
 		//=====================
-		public ArrayList<MemberDTO> getAllMember() {
+		public ArrayList<MemberDTO> getAllMember(int currentPage) {
 			ArrayList<MemberDTO> mList=new ArrayList<>();
 			MemberDTO m=null;
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
-			String sql="select * from register";
+			int start=(currentPage-1)*20;
+			String sql="select * from register limit ?,20";
 			try {
 				conn=getConn();
 				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, start);
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					m=new MemberDTO();
@@ -191,6 +193,9 @@ public class MemberDAO {
 			}
 			return mList;
 		}
+		//=====================		
+		//  관리자 신규 등록
+		//=====================
 		public int changeAdmin(String id,int admin) {
 			int result=0;
 			Connection conn=null;
@@ -209,5 +214,27 @@ public class MemberDAO {
 				MemberDAO.close(conn, pstmt);
 			}
 			return result;
+		}
+		//=====================		
+		//  전체 회원 수 
+		//=====================
+		public int memberCount() {
+			int count=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql="select count(*) from register";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				rs.next();
+				count=rs.getInt(1);
+			}catch(Exception e) {
+				System.out.println("memberCount() 실행중 오류발생 : "+e);
+			}finally {
+				MemberDAO.close(conn, pstmt, rs);
+			}
+			return count;
 		}
 }//c

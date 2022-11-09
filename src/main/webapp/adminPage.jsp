@@ -10,6 +10,9 @@
 			td{
 				border:1px solid black;
 			}
+			li{
+				list-style:none;
+			}
 		</style>
 	</head>
 	<body>
@@ -38,8 +41,21 @@
 						</tr>
 					</c:forEach>	
 				</table>
+				<ul>
+					<c:forEach begin="1" end="${nOfPage }" var="i">
+						<c:choose>
+							<c:when test="${currentPage eq i }">
+								<li style="font-weight:bold; text-decoration:underline">${i }</li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="AdminServlet?currentPage=${i }">${i }</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</ul>
 			</div>
-			<a href="noticeWrite.jsp">공지사항 글쓰기</a>
+			<a href="noticeWrite.jsp">공지사항 글쓰기</a><br>
+			<a href="index.jsp">홈으로</a>
 		</div>
 	</body>
 </html>
