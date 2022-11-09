@@ -13,19 +13,40 @@
 		</style>
 	</head>
 	<body>
-	<h1>내용물 확인페이지</h1>
+	<h1>내용 확인페이지</h1>
 		   
 		 <table>
-				<th>내용 </th>
-					<tr>
-						<td>${content.getNumber() }</td> 
+				<th colspan="3">내용 </th>
+				<th colspan="2">작성일자 </th>
+				<th colspan="1">글쓴이 </th>
+				<c:if test="${loginUser.id eq content.getNickname()}">
+					<th>수정 </th>
+					<th>삭제 </th>
+				</c:if>
+					<tr> 
 						<td colspan="4"> ${content.getContent() }</td>
 						<td>${content.getWritingtime() }</td>
-						<td>
-							<a href="NoticeDeleteServlet?number=${content.getNumber() }">
-								<input type="button" value="삭제">
-							</a>
-						</td>
+						<td>${content.getNickname()}</td>
+						<c:choose>
+							<c:when test="${!empty loginUser.id }">
+								<input type="hidden" value="${loginUser.id }" name="id">
+								<td>
+								<!-- content/num을 가져가야함 get -->
+									<c:if test="${loginUser.id eq content.getNickname()}">
+										<a href="NoticeUpdateServlet?number=${content.getNumber()}"> 
+											<input type="button" value="수정">
+										</a>
+										</td>
+										<td>
+											<input type="hidden" value=${content.getNumber() }>
+											<input type="hidden" value=${content.getNickname() }>
+											<a href="NoticeDeleteServlet?number=${content.getNumber() }">
+												<input type="button" value="삭제">
+											</a>
+										</td>			
+									</c:if>			
+							</c:when>
+						</c:choose>
 					</tr>
 		</table>
 		<br>

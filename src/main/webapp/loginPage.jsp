@@ -17,7 +17,6 @@
 		<form action="LogoutServlet" method="get">
 			<input type="submit" value="로그아웃">
 		</form>
-		<a href="memberUpdate?userid=${loginUser.id }">회원정보수정</a>
-		
+		<a href="memberUpdate?userid=${loginUser.id }">회원정보수정</a><br>
 	</body>
 </html>
