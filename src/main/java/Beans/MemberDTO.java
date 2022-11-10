@@ -15,6 +15,8 @@ public class MemberDTO {
 //	private String category;
 	private String meter;
 	private int admin;
+	
+	
 	public int getNumber() {
 		return number;
 	}
@@ -94,6 +96,12 @@ public class MemberDTO {
 		this.admin = admin;
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberDTO [number=" + number + ", id=" + id + ", nickname=" + nickname + ", name=" + name
+				+ ", password=" + password + ", phone=" + phone + ", email=" + email + ", address=" + address
+				+ ", tos1=" + tos1 + ", tos2=" + tos2 + ", meter=" + meter + ", admin=" + admin + "]";
+	}
 	
 	
 }
