@@ -52,7 +52,7 @@ public class detailDAO {
 		//디비 조회 기능 메서드(전체조회)
 		public List<detailDTO> selectAllDetail() {
 			List<detailDTO> list=new ArrayList<detailDTO>();	//TO 정보들이 있는곳의 객체를 생성
-			String sql="select * from intropage;";
+			String sql="select * from intropage where visible=1;";
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
@@ -118,7 +118,7 @@ public class detailDAO {
 			String param="%"+shortpage+"%";//이렇게 안하고 바로 like "스트링" 해도 충분히 검색됨!!
 			System.out.println(param);
 			String sql="select number,shortpage, detailpage, imageurl, textminning1, textminning2, textminning3, textminning4, api_latitude, api_longitude "
-					+ "from intropage where number=?";
+					+ "from intropage where number=? and visible=1";
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
@@ -179,7 +179,75 @@ public class detailDAO {
 			return result;
 		}
 		
-		
-		
-		
+		//=============================		
+		// 수정  
+		//=============================
+		public int detailUpdate(detailDTO DTO) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			String sql="update intropage set shortpage=?, detailpage=?, api_latitude=?, api_longitude=?, imageurl=? where number=?";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				
+				pstmt.setString(1, DTO.getShortpage());
+				pstmt.setString(2, DTO.getDetailpage());
+				pstmt.setString(3, DTO.getApi_latitude());
+				pstmt.setString(4, DTO.getApi_longitude());
+				pstmt.setString(5, DTO.getImageurl());
+				pstmt.setInt(6, DTO.getNumber());
+				success=pstmt.executeUpdate();
+			}catch(Exception e) {
+				System.out.println("detailUpdate() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
+		//=============================		
+		// 추가  
+		//=============================
+		public int detailInsert(detailDTO DTO) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			String sql="insert into intropage (shortpage, detailpage, api_latitude, api_longitude,imageurl, visible) values (?,?,?,?,?,?)";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, DTO.getShortpage());
+				pstmt.setString(2, DTO.getDetailpage());
+				pstmt.setString(3, DTO.getApi_latitude());
+				pstmt.setString(4, DTO.getApi_longitude());
+				pstmt.setString(5, DTO.getImageurl());
+				pstmt.setInt(6, 1);
+				success=pstmt.executeUpdate();
+			}catch(Exception e) {
+				System.out.println("detailInsert() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
+		//=============================		
+		// 삭제  
+		//=============================
+		public int detailDelete(int number) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			String sql="update intropage set visible=0 where number=?";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, number);
+				success=pstmt.executeUpdate();
+			}catch(Exception e) {
+				System.out.println("detailDelete 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
 }//c

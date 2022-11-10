@@ -19,6 +19,7 @@
 		<div id="wrap">
 			<h1>관리자 페이지</h1>
 			<a href="AdminServlet">회원 정보</a><br>
+			<a href="PlaceServlet">장소 수정</a>
 			<a href="noticeWrite.jsp">공지사항 글쓰기</a><br>
 			<a href="index.jsp">홈으로</a>
 		</div>
