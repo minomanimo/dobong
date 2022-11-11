@@ -67,8 +67,7 @@ public class detailDAO {
 					d.setShortpage(rs.getString("shortpage"));
 					d.setDetailpage(rs.getString("detailpage"));
 					d.setImageurl(rs.getString("imageurl"));
-					d.setTextminning1(rs.getString("textminning1"));
-					d.setTextminning2(rs.getString("textminning2"));
+					
 					list.add(d);
 				}
 				System.out.println(list);
@@ -117,8 +116,7 @@ public class detailDAO {
 			
 			String param="%"+shortpage+"%";//이렇게 안하고 바로 like "스트링" 해도 충분히 검색됨!!
 			System.out.println(param);
-			String sql="select number,shortpage, detailpage, imageurl, textminning1, textminning2, textminning3, textminning4, api_latitude, api_longitude "
-					+ "from intropage where number=? and visible=1";
+			String sql="select * from intropage where number=? and visible=1";
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
@@ -134,10 +132,7 @@ public class detailDAO {
 					d.setShortpage(rs.getString("shortpage"));
 					d.setDetailpage(rs.getString("detailpage"));
 					d.setImageurl(rs.getString("imageurl"));
-					d.setTextminning1(rs.getString("textminning1"));
-					d.setTextminning2(rs.getString("textminning2"));
-					d.setTextminning3(rs.getString("textminning3"));
-					d.setTextminning4(rs.getString("textminning4"));
+					
 					d.setApi_latitude(rs.getString("api_latitude"));
 					d.setApi_longitude(rs.getString("api_longitude"));
 					detailPage.add(d);
@@ -165,10 +160,7 @@ public class detailDAO {
 				conn=getConn();
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1, r.getShortpage());
-				pstmt.setString(2, r.getTextminning1());
-//				pstmt.setString(3, r.getTextminning2());
-//				pstmt.setString(4, r.getTextminning3());
-//				pstmt.setString(5, r.getTextminning4());
+				
 				pstmt.setInt(3, r.getNumber());
 				result=pstmt.executeUpdate();
 			} catch (Exception e) {
