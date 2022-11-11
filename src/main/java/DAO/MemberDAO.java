@@ -154,6 +154,44 @@ public class MemberDAO {
 			//여기는 어레이 리스트 말고 객체 통채로 리턴함 꼭 확인할거! 
 			return m;	
 		}
+		/*========================		
+		  회원정보 업데이트 		[xeo:11/10] number 정보로 매칭 성공 1/ 실패 0
+		=========================*/
+		public int updateRegister(MemberDTO dto){
+			String sql="update register set number=?, id=?, nickname=?, name=?, password=?, phone=?, email=?,  "
+					+ "address=?, tos1=?, tos2=?, meter=?, admin=?  where number=?";
+					
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			int res=0;
+			
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, dto.getNumber());
+				pstmt.setString(2, dto.getId());
+				pstmt.setString(3, dto.getNickname());
+				pstmt.setString(4, dto.getName());
+				pstmt.setString(5, dto.getPassword());
+				pstmt.setString(6, dto.getPhone());
+				pstmt.setString(7, dto.getEmail()); 
+				pstmt.setString(8, dto.getAddress());
+				pstmt.setString(9, dto.getTos1()); 
+				pstmt.setString(10, dto.getTos2());
+				pstmt.setString(11, dto.getMeter());
+				pstmt.setInt(12, dto.getAdmin());
+				pstmt.setInt(13, dto.getNumber());
+				
+				res=pstmt.executeUpdate();
+				
+			}catch (Exception e) {
+				System.out.println("updateRegister() SQL 수정중 오류 "+e);
+			}finally {
+				MemberDAO.close(conn, pstmt);
+			}
+			return res;
+		}
+		
 		//=====================		
 		//  관리자용 회원정보 조회
 		//=====================
@@ -237,4 +275,5 @@ public class MemberDAO {
 			}
 			return count;
 		}
+
 }//c

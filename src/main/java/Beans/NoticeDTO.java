@@ -55,19 +55,14 @@ public class NoticeDTO {
 	public void setWritingtime(String writingtime) {
 		this.writingtime = writingtime;
 	}
-//	public String getChangetime() {
-//		return changetime;
+
+	
+//	@Override
+//	public String toString() {
+//		return "NoticeDTO [id=" + id + ", password=" + password + ", number=" + number + ", nickname=" + nickname
+//				+ ", title=" + title + ", content=" + content + ", writingtime=" + writingtime + ", changetime="
+//				+ changetime + "]";
 //	}
-//	public void setChangetime(String changetime) {
-//		this.changetime = changetime;
-//	}
-//	
-	@Override
-	public String toString() {
-		return "NoticeDTO [id=" + id + ", password=" + password + ", number=" + number + ", nickname=" + nickname
-				+ ", title=" + title + ", content=" + content + ", writingtime=" + writingtime + ", changetime="
-				+ changetime + "]";
-	}
 	
 	
 }
