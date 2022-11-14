@@ -26,6 +26,38 @@ public class NoticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		System.out.println("NoticeServlet GET 실행");
+		
+		
+		int currentPage=1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage=Integer.parseInt(request.getParameter("currentPage"));
+		}
+		int recordsPerPage=10;
+		if(request.getParameter("recordsPerPage")!=null) {
+			recordsPerPage=Integer.parseInt(request.getParameter("recordsPerPage"));
+		}
+		
+	//	int number=Integer.parseInt(request.getParameter("number"));
+		
+		NoticeDAO DAO=NoticeDAO.getInstance();
+		ArrayList<NoticeDTO> noticeList=DAO.findList(currentPage, recordsPerPage);
+		System.out.println(noticeList+"******");
+		
+		int row= DAO.getNumOfRows();
+		int nOfpage=row/recordsPerPage;
+		
+		if(row%recordsPerPage>0) {
+			nOfpage++;
+		}
+		request.setAttribute("noticeList", noticeList);
+		request.setAttribute("nOfPage", nOfpage);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("recordsPerPage", recordsPerPage);
+		RequestDispatcher dis=request.getRequestDispatcher("notice.jsp");
+		//여기에서 jsp을 보내준다!
+		dis.forward(request, response);
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeDAO dao=NoticeDAO.getInstance();
 		List<NoticeDTO> noticeList=dao.selectAllReview();
 		//System.out.println(noticeList);
@@ -52,14 +84,6 @@ public class NoticeServlet extends HttpServlet {
 //		System.out.println("총페이지: "+nOfPage);
 //		System.out.println("전체자료수 "+row);
 		//System.out.println("마지막 페이지 자료: "+ row%recordsPerPage);
-		
-		
-		RequestDispatcher dis=request.getRequestDispatcher("notice.jsp");
-		//여기에서 jsp을 보내준다!
-		dis.forward(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }

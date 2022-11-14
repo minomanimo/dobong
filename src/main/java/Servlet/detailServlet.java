@@ -40,7 +40,7 @@ public class detailServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("POST detailServlet 실행");
-		
+		this.doGet(request, response);
 		//response.sendRedirect("detail.jsp");
 		
 				

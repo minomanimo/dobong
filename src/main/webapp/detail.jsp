@@ -15,6 +15,7 @@
 				height: 150px;
 			}
 		</style>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	</head>
 	<body>
 	
@@ -95,6 +96,29 @@
 				</c:forEach>
 		</table>
 		
-		
+		<script>
+			var td=document.getElementsByTagName("td")[3];
+			var number=td.getElementsByTagName("input")[2].value;
+			$.ajax({
+				url:"GetTextmining?number="+number,
+				method:"GET",
+				async:true,
+				success:function(data){
+					var text=data.getElementsByTagName("text");
+					var count=data.getElementsByTagName("count");
+					getText(text,count);
+				},
+				error:function(log){
+					console.log("error");
+					console.log(log);
+				}
+			});
+			function getText(text, count){
+				for(var i=0; i<text.length; i++){
+					console.log(text[i].firstChild.data);
+					console.log(count[i].firstChild.data);
+				}
+			}
+		</script>
 	</body>
 </html>

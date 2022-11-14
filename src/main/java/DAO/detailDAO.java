@@ -242,4 +242,78 @@ public class detailDAO {
 			}
 			return success;
 		}
+		
+		//=============================		
+		// set텍스트마이닝  
+		//=============================
+		public int setTextmining(String review, int number) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			
+			int count=0;
+			String[] split=review.split(" ");
+			try {
+				for(String text : split) {
+					String sql="select * from textminning where page_num=? and textminning=?";
+					conn=getConn();
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setInt(1, number);
+					pstmt.setString(2, text);
+					rs=pstmt.executeQuery();
+					if(rs.next()) {
+						count=rs.getInt("counts");
+						sql="update textminning set counts=? where textminning=? and page_num=?";
+						pstmt=conn.prepareStatement(sql);
+						pstmt.setInt(1, count+1);
+						pstmt.setString(2, text);
+						pstmt.setInt(3, number);
+						System.out.println(text);
+						success=pstmt.executeUpdate();
+					}else {
+						sql="insert into textminning (page_num,textminning, counts) values (?,?,?)";
+						pstmt=conn.prepareStatement(sql);
+						pstmt.setInt(1, number);
+						pstmt.setString(2, text);
+						pstmt.setInt(3, 1);
+						success=pstmt.executeUpdate();
+					}
+				}
+				
+			}catch(Exception e) {
+				System.out.println("setTextmining() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
+		//=============================		
+		// get텍스트마이닝  
+		//=============================
+		public List<tmDTO> getTextmining(int number){
+			List<tmDTO> tlist=new ArrayList<tmDTO>();
+			tmDTO dto;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql="select * from textminning where page_num=? and counts>=5";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, number);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					dto=new tmDTO();
+					dto.setText(rs.getString("textminning"));
+					dto.setCount(rs.getInt("counts"));
+					tlist.add(dto);
+				}
+			}catch(Exception e) {
+				System.out.println("getTextmining() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt, rs);
+			}
+			return tlist;
+		}
 }//c
