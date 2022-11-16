@@ -52,7 +52,7 @@ public class detailDAO {
 		//디비 조회 기능 메서드(전체조회)
 		public List<detailDTO> selectAllDetail() {
 			List<detailDTO> list=new ArrayList<detailDTO>();	//TO 정보들이 있는곳의 객체를 생성
-			String sql="select * from intropage;";
+			String sql="select * from intropage where visible=1;";
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
@@ -67,8 +67,7 @@ public class detailDAO {
 					d.setShortpage(rs.getString("shortpage"));
 					d.setDetailpage(rs.getString("detailpage"));
 					d.setImageurl(rs.getString("imageurl"));
-					d.setTextminning1(rs.getString("textminning1"));
-					d.setTextminning2(rs.getString("textminning2"));
+					
 					list.add(d);
 				}
 				System.out.println(list);
@@ -117,8 +116,7 @@ public class detailDAO {
 			
 			String param="%"+shortpage+"%";//이렇게 안하고 바로 like "스트링" 해도 충분히 검색됨!!
 			System.out.println(param);
-			String sql="select number,shortpage, detailpage, imageurl, textminning1, textminning2, textminning3, textminning4, api_latitude, api_longitude "
-					+ "from intropage where number=?";
+			String sql="select * from intropage where number=? and visible=1";
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
@@ -134,10 +132,7 @@ public class detailDAO {
 					d.setShortpage(rs.getString("shortpage"));
 					d.setDetailpage(rs.getString("detailpage"));
 					d.setImageurl(rs.getString("imageurl"));
-					d.setTextminning1(rs.getString("textminning1"));
-					d.setTextminning2(rs.getString("textminning2"));
-					d.setTextminning3(rs.getString("textminning3"));
-					d.setTextminning4(rs.getString("textminning4"));
+					
 					d.setApi_latitude(rs.getString("api_latitude"));
 					d.setApi_longitude(rs.getString("api_longitude"));
 					detailPage.add(d);
@@ -165,10 +160,7 @@ public class detailDAO {
 				conn=getConn();
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1, r.getShortpage());
-				pstmt.setString(2, r.getTextminning1());
-//				pstmt.setString(3, r.getTextminning2());
-//				pstmt.setString(4, r.getTextminning3());
-//				pstmt.setString(5, r.getTextminning4());
+				
 				pstmt.setInt(3, r.getNumber());
 				result=pstmt.executeUpdate();
 			} catch (Exception e) {
@@ -179,7 +171,149 @@ public class detailDAO {
 			return result;
 		}
 		
+		//=============================		
+		// 수정  
+		//=============================
+		public int detailUpdate(detailDTO DTO) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			String sql="update intropage set shortpage=?, detailpage=?, api_latitude=?, api_longitude=?, imageurl=? where number=?";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				
+				pstmt.setString(1, DTO.getShortpage());
+				pstmt.setString(2, DTO.getDetailpage());
+				pstmt.setString(3, DTO.getApi_latitude());
+				pstmt.setString(4, DTO.getApi_longitude());
+				pstmt.setString(5, DTO.getImageurl());
+				pstmt.setInt(6, DTO.getNumber());
+				success=pstmt.executeUpdate();
+			}catch(Exception e) {
+				System.out.println("detailUpdate() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
+		//=============================		
+		// 추가  
+		//=============================
+		public int detailInsert(detailDTO DTO) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			String sql="insert into intropage (shortpage, detailpage, api_latitude, api_longitude,imageurl, visible) values (?,?,?,?,?,?)";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, DTO.getShortpage());
+				pstmt.setString(2, DTO.getDetailpage());
+				pstmt.setString(3, DTO.getApi_latitude());
+				pstmt.setString(4, DTO.getApi_longitude());
+				pstmt.setString(5, DTO.getImageurl());
+				pstmt.setInt(6, 1);
+				success=pstmt.executeUpdate();
+			}catch(Exception e) {
+				System.out.println("detailInsert() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
+		//=============================		
+		// 삭제  
+		//=============================
+		public int detailDelete(int number) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			String sql="update intropage set visible=0 where number=?";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, number);
+				success=pstmt.executeUpdate();
+			}catch(Exception e) {
+				System.out.println("detailDelete 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
 		
-		
-		
+		//=============================		
+		// set텍스트마이닝  
+		//=============================
+		public int setTextmining(String review, int number) {
+			int success=0;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			
+			int count=0;
+			String[] split=review.split(" ");
+			try {
+				for(String text : split) {
+					String sql="select * from textminning where page_num=? and textminning=?";
+					conn=getConn();
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setInt(1, number);
+					pstmt.setString(2, text);
+					rs=pstmt.executeQuery();
+					if(rs.next()) {
+						count=rs.getInt("counts");
+						sql="update textminning set counts=? where textminning=? and page_num=?";
+						pstmt=conn.prepareStatement(sql);
+						pstmt.setInt(1, count+1);
+						pstmt.setString(2, text);
+						pstmt.setInt(3, number);
+						System.out.println(text);
+						success=pstmt.executeUpdate();
+					}else {
+						sql="insert into textminning (page_num,textminning, counts) values (?,?,?)";
+						pstmt=conn.prepareStatement(sql);
+						pstmt.setInt(1, number);
+						pstmt.setString(2, text);
+						pstmt.setInt(3, 1);
+						success=pstmt.executeUpdate();
+					}
+				}
+				
+			}catch(Exception e) {
+				System.out.println("setTextmining() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt);
+			}
+			return success;
+		}
+		//=============================		
+		// get텍스트마이닝  
+		//=============================
+		public List<tmDTO> getTextmining(int number){
+			List<tmDTO> tlist=new ArrayList<tmDTO>();
+			tmDTO dto;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql="select * from textminning where page_num=? and counts>=5";
+			try {
+				conn=getConn();
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, number);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					dto=new tmDTO();
+					dto.setText(rs.getString("textminning"));
+					dto.setCount(rs.getInt("counts"));
+					tlist.add(dto);
+				}
+			}catch(Exception e) {
+				System.out.println("getTextmining() 실행중 오류발생 : "+e);
+			}finally {
+				detailDAO.close(conn, pstmt, rs);
+			}
+			return tlist;
+		}
 }//c
