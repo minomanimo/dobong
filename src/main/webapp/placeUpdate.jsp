@@ -48,6 +48,7 @@
 					<input type="submit" value="추가">
 				</form>
 			</div>
+			<a href="adminPage.jsp">관리자 페이지로</a>
 		</div>
 	</body>
 </html>

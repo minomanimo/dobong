@@ -57,8 +57,9 @@
 					<tfoot>
 					<tr>
 						<td colspan="7">
-							<form action="NoticePageServlet" method="get">
-								<input type="hidden" name="currentPage" value="1"> <!--이거왜 벨류가 1이지??? -->
+							<form action="NoticeServlet" method="get">
+								<input type="hidden" name="currentPage" value="${currentPage }"> <!--이거왜 벨류가 1이지??? -->
+								<input type="hidden" id="record" value="${recordsPerPage }">
 								<!--  <input type="hidden" name="number" value="0">-->
 								<select name="recordsPerPage"> 
 									<option value="5"> 5개식 보기</option> 
@@ -74,7 +75,7 @@
 									</c:when> 
 								<c:otherwise>
 									<li> 
-									<a href="NoticePageServlet?currentPage=${i }&recordsPerPage=${recordsPerPage}&number=0">${i }</a> </li>
+									<a href="NoticeServlet?currentPage=${i }&recordsPerPage=${recordsPerPage}&number=0">${i }</a> </li>
 								</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -133,5 +134,16 @@
 		</ul> 
 		<br><a href="noticeWrite.jsp"> <input type="button" value="글쓰기"> </a>-->
 		<br><a href="index.jsp">홈으로</a>
+		<script>
+			var record=document.getElementById("record").value;
+			var select=document.getElementsByTagName("option");
+			if(record==5){
+				select[0].selected=true;
+			}else if(record==10){
+				select[1].selected=true;
+			}else{
+				select[2].selected=true;
+			}
+		</script>
 	</body>
 </html>
