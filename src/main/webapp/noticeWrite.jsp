@@ -7,11 +7,9 @@
 		<meta charset="utf-8">
 		<title>공지사항</title>
 		<style> 
-	
 			ol{
-			float:left;
-			border:1px solid black;
-			
+				float:left;
+				border:1px solid black;
 			}
 		</style>
 	</head>

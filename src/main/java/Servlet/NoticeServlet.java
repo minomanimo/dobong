@@ -41,7 +41,8 @@ public class NoticeServlet extends HttpServlet {
 		
 		NoticeDAO DAO=NoticeDAO.getInstance();
 		ArrayList<NoticeDTO> noticeList=DAO.findList(currentPage, recordsPerPage);
-		System.out.println(noticeList+"******");
+//		System.out.println("**********");
+//		System.out.println(noticeList);
 		
 		int row= DAO.getNumOfRows();
 		int nOfpage=row/recordsPerPage;

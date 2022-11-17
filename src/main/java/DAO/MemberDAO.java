@@ -151,7 +151,7 @@ public class MemberDAO {
 			}finally {
 				MemberDAO.close(conn, pstmt, rs);
 			}
-			//여기는 어레이 리스트 말고 객체 통채로 리턴함 꼭 확인할거! 
+			//여기는 어레이 리스트 말고 객체 통채로 리턴함 꼭 확인 
 			return m;	
 		}
 		/*========================		

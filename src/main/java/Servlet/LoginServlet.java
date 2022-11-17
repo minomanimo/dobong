@@ -18,7 +18,6 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("GET");
-		//여기를 왜 해줘야 하는지 정확히 모르겠네
 		RequestDispatcher dis=request.getRequestDispatcher("login.jsp");
 		dis.forward(request, response);
 	}
@@ -27,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("POST");
 		request.setCharacterEncoding("utf-8");
-		String url="login.jsp";	//왜 변경 url에 필요한지 모르겠다!
+		String url="login.jsp";	
 		String id=request.getParameter("id");
 		String password=request.getParameter("password");
 		
