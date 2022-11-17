@@ -66,7 +66,6 @@ public class NoticeDAO {
 				n.setTitle(rs.getString("title"));
 				n.setContent(rs.getString("content"));
 				n.setWritingtime(rs.getString("writingtime"));	//연도 빼는 작업필요
-				//n.setChangetime(rs.getString("changetime"));		//연도 빼는 작업필요
 				list.add(n);
 			}
 			
@@ -176,15 +175,16 @@ public class NoticeDAO {
 	//  공지사항 수정(update)
 	//============================
 	public void updateNoice(NoticeDTO DTO) {
-		String sql="update notice set title=?, content=? where number=?";
+		String sql="update notice set nickname=?, title=?, content=?  where number=?";
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		try {
 			conn=getConn();
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, DTO.getTitle());
-			pstmt.setString(2, DTO.getContent());
-			pstmt.setString(3, DTO.getNumber());
+			pstmt.setString(1, DTO.getNickname());
+			pstmt.setString(2, DTO.getTitle());
+			pstmt.setString(3, DTO.getContent());
+			pstmt.setString(4, DTO.getNumber());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("updateNoice() sql 접속오류: "+e);
@@ -242,6 +242,8 @@ public class NoticeDAO {
 				n.setTitle(rs.getString("title"));
 				n.setContent(rs.getString("content"));
 				n.setWritingtime(rs.getString("writingtime"));
+				//작성자 추가 11/16[xeo: 공지사항 게시판 닉네임 설정]
+				n.setNickname(rs.getString("nickname"));
 				list.add(n);
 			}
 		}catch (Exception e) {

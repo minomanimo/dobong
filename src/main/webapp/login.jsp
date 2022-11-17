@@ -13,7 +13,6 @@
 				list-style: none;
 				display: inline-block;
 			}
-			/*포기!!! js로 하는게 훨씬 편하겠다! */
 			.loginUl li{
 				display: inline-block;
 			}
@@ -41,13 +40,27 @@
 	</head>
 	<body>
 		<div class="loginMenu">
-			<form action="LoginServlet" method="post">
+			<form action="LoginServlet" method="post" name=frm>
 				<input type="text" name="id" placeholder="ID 입력"><br>
 				<input type="password" name="password" placeholder="비밀번호 입력"><br>
-				<input type="submit" value="로그인">
+				<input type="submit" value="로그인" onclick="return check()">
 			</form>
 		</div>
-		
-		
-	</body>
+		<script type="text/javascript">
+			function check() {
+				let id=document.frm.id.value;
+				console.log(id);
+				let password=document.frm.password.value;
+				
+				if(id.length===0){
+					alert("id를 입력해주세요");
+					return false;
+				}else if(password.length===0){
+					alert("비밀번호를 입력해주세요");
+					return false;
+				}
+				return true;
+			}
+		</script>
+		</body>
 </html>

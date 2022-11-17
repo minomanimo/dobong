@@ -5,7 +5,7 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>리뷰확인</title>
+		<title>공지사항</title>
 		<style>
 			a{
 			 text-decoration:none;
@@ -49,7 +49,6 @@
 						<tr>
 							<td>${noticeList.getNumber() }</td>
 							<td> <a href="NoticeContentServlet?number=${noticeList.getNumber()}"> ${noticeList.getTitle() }</a></td> 
-							<!-- <td>${noticeList.getContent() }</td> -->
 							<td>${noticeList.getNickname() }</td>
 							<td>${noticeList.getWritingtime() }</td>
 						</tr>

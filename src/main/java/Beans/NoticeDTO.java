@@ -55,14 +55,12 @@ public class NoticeDTO {
 	public void setWritingtime(String writingtime) {
 		this.writingtime = writingtime;
 	}
-
 	
-//	@Override
-//	public String toString() {
-//		return "NoticeDTO [id=" + id + ", password=" + password + ", number=" + number + ", nickname=" + nickname
-//				+ ", title=" + title + ", content=" + content + ", writingtime=" + writingtime + ", changetime="
-//				+ changetime + "]";
-//	}
+	@Override
+	public String toString() {
+		return "NoticeDTO [id=" + id + ", password=" + password + ", number=" + number + ", **nickname=**" + nickname
+				+ ", title=" + title + ", content=" + content + ", writingtime=" + writingtime+ "]";
+	}
 	
 	
 }

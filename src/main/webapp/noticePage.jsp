@@ -6,16 +6,27 @@
 <head>
 	<meta charset="utf-8">
 		<title>공지사항</title>
-		<style type="text/css">
-			td{
-				border: 1px solid #ccc;
+		<style>
+			a{
+			 text-decoration:none;
 			}
-			ul{
-				display: inline-block;
+			html{
+				width:100%;
 			}
-			li{
-				list-style: none;
-				display: inline-block;
+			table{
+			width:70%;
+				text-align:center;
+				margin:0 auto;
+			}
+			body{
+				width:99%;
+				text-align:center;
+				margin:0 auto;
+			}
+			#write_btn:after{
+				content:"";
+				display:block;
+				clear:both;
 			}
 		</style>
 		</head>
