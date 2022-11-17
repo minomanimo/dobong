@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,15 +44,27 @@ public class NoticeUpdateServlet extends HttpServlet {
 		String number=request.getParameter("number");
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
+		String nickname=request.getParameter("id");
+		String writingtime=request.getParameter("writingtime");
+		System.out.println("********** "+writingtime);
 		
 		NoticeDTO dto=new NoticeDTO();
+//		dto.setId(nickname);
 		dto.setNumber(number);
 		dto.setTitle(title);
 		dto.setContent(content);
+		dto.setNickname(nickname);
+		dto.setWritingtime(writingtime);
+		
 		NoticeDAO dao=NoticeDAO.getInstance();
 		dao.updateNoice(dto);
-		response.sendRedirect("NoticeServlet");	//바로 리스트 서블렛으로 이동 
+		List<NoticeDTO> updateNotice=dao.selectAllReview();
+		System.out.println("*******"+dto);
 		
+		//response.sendRedirect("notice.jsp");	//바로 리스트 서블렛으로 이동
+		request.setAttribute("changeNotice ", updateNotice);
+		RequestDispatcher dis=request.getRequestDispatcher("/checkPage/noticeUPdate_C.jsp");
+		dis.forward(request, response);
 		
 	}
 

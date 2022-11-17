@@ -42,6 +42,9 @@ public class MainDAO {
 	
 	}
 	
+	//=============================
+	// 랜드마크 이미지 보여주기
+	//=============================
 	public List<ImageDTO> getLandmarkImg(){
 		ImageDTO dto=null;
 		List<ImageDTO> imglist=new ArrayList<>();
@@ -72,6 +75,9 @@ public class MainDAO {
 		return imglist;
 	}
 	
+	//=============================
+	// 관리자 랜드마크 이미지 업데이트
+	//=============================
 	public void setLandmarkImg(List<ImageDTO> imglist) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
