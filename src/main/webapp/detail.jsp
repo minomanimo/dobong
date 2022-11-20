@@ -68,7 +68,7 @@
 	
 			</c:forEach>
 		</table>
-	
+		<input type="text" id="address"><input type="button" id="submit" value="검색">
 		<div id="map" style="width: 100%; height: 400px;"></div>
 		<div id="map" style="width: 100%; height: 400px;"></div>
 		<script>
@@ -96,22 +96,11 @@
 						console.log(count[i].firstChild.data);
 					}
 				}
-	<<<<<<< HEAD
-				$.ajax({
-					url:"NaverMap",
-					method:"GET",
-					async:true,
-					success:function(data){	
-						
-					},
-					error:function(log){
-						console.log("error");
-						console.log(log);
-					}
-				});
+	//<<<<<<< HEAD
 				
-	=======
-	>>>>>>> 4dc5e1f44bf49beca5e3e1c30b49b10413aca68a
+				
+	//=======
+	//>>>>>>> 4dc5e1f44bf49beca5e3e1c30b49b10413aca68a
 				//====================
 				//지도 api 서비스 환경등록에 → Web 서비스 URL→  http://localhost을 추가해야 사용가능
 				//====================
@@ -129,7 +118,7 @@
 				
 				
 				//클릭 후 위도,경도 가지고 오기
-				var map = new naver.maps.Map("map", {
+			var map = new naver.maps.Map("map", {
 			    center: new naver.maps.LatLng(37.3595316, 127.1052133),
 			    zoom: 15,
 			    mapTypeControl: true
@@ -141,7 +130,7 @@
 			
 			map.setCursor('pointer');
 			
-			function searchCoordinateToAddress(latlng) {
+			/* function searchCoordinateToAddress(latlng) {
 			
 			    infoWindow.close();
 			
@@ -217,11 +206,52 @@
 			        map.setCenter(point);
 			        infoWindow.open(map, point);
 			    });
-			}
+			} */
+			function searchAddressToCoordinate(address){
+				$.ajax({					//geocoding servlet통신
+					url:"NaverMap?address="+address,
+					method:"GET",
+					async:true,
+					success:function(data){	
+						var str=data.getElementsByTagName("data")[0].firstChild.data;
+						var arr=JSON.parse(str);
+						var htmlAddresses = [],
+			            item = arr.addresses[0],
+			            point = new naver.maps.Point(item.x, item.y);
 			
+				        if (item.roadAddress) {
+				            htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
+				        }
+				
+				        if (item.jibunAddress) {
+				            htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
+				        }
+				
+				        if (item.englishAddress) {
+				            htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
+				        }
+				
+				        infoWindow.setContent([
+				            '<div style="padding:10px;min-width:200px;line-height:150%;">',
+				            '<h4 style="margin-top:5px;">검색 주소 : '+ address +'</h4><br />',
+				            htmlAddresses.join('<br />'),
+				            '</div>'
+				        ].join('\n'));
+				
+				        map.setCenter(point);
+				        infoWindow.open(map, point);
+						console.log(arr);
+					},
+					error:function(log){
+						console.log("error");
+						console.log(log);
+					}
+				});
+			}
 			function initGeocoder() {
 			    map.addListener('click', function(e) {
-			        searchCoordinateToAddress(e.coord);
+			        //searchCoordinateToAddress(e.coord);
+			        console.log(e.coord);
 			    });
 			
 			    $('#address').on('keydown', function(e) {
