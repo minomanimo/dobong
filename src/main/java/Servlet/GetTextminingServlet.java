@@ -31,6 +31,7 @@ public class GetTextminingServlet extends HttpServlet {
 		}
 		out.println("</response>");
 		out.close();
+
 	}
 
 

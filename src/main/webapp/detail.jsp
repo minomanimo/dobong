@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -61,6 +62,7 @@
 				<tr>
 					<td colspan="3">많이 집계된 리뷰를 보는곳입니다<br>
 					</td>
+<<<<<<< Updated upstream
 				</tr>
 				<tr>
 					<td colspan="7"></td>
@@ -95,6 +97,37 @@
 						console.log(text[i].firstChild.data);
 						console.log(count[i].firstChild.data);
 					}
+=======
+				</form>
+			</tr>
+
+			<tr>
+				<td colspan="3"><br>
+				</td>
+			</tr>
+
+		</c:forEach>
+	</table>
+
+	<div id="map" style="width: 100%; height: 400px;"></div>
+	<div id="map" style="width: 100%; height: 400px;"></div>
+	<script>
+	
+			var td=document.getElementsByTagName("td")[3];
+			var number=td.getElementsByTagName("input")[2].value;
+			$.ajax({
+				url:"GetTextmining?number="+number,
+				method:"GET",
+				async:true,
+				success:function(data){
+					var text=data.getElementsByTagName("text");
+					var count=data.getElementsByTagName("count");
+					getText(text,count);
+				},
+				error:function(log){
+					console.log("error");
+					console.log(log);
+>>>>>>> Stashed changes
 				}
 	//<<<<<<< HEAD
 				
