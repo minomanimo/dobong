@@ -14,10 +14,6 @@
 		<script type="text/javascript"
 			src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bm5xtq2mgp&submodules=geocoder"></script>
 		<style type="text/css">
-		<<<<<<< HEAD
-		<style type="text/css">
-		=======
-		>>>>>>> 4dc5e1f44bf49beca5e3e1c30b49b10413aca68a
 		td {
 			border: 1px solid #ccc;
 		}
@@ -62,7 +58,6 @@
 				<tr>
 					<td colspan="3">많이 집계된 리뷰를 보는곳입니다<br>
 					</td>
-<<<<<<< Updated upstream
 				</tr>
 				<tr>
 					<td colspan="7"></td>
@@ -97,7 +92,6 @@
 						console.log(text[i].firstChild.data);
 						console.log(count[i].firstChild.data);
 					}
-=======
 				</form>
 			</tr>
 
@@ -105,7 +99,6 @@
 				<td colspan="3"><br>
 				</td>
 			</tr>
-
 		</c:forEach>
 	</table>
 
@@ -127,13 +120,9 @@
 				error:function(log){
 					console.log("error");
 					console.log(log);
->>>>>>> Stashed changes
 				}
-	//<<<<<<< HEAD
 				
-				
-	//=======
-	//>>>>>>> 4dc5e1f44bf49beca5e3e1c30b49b10413aca68a
+	
 				//====================
 				//지도 api 서비스 환경등록에 → Web 서비스 URL→  http://localhost을 추가해야 사용가능
 				//====================
