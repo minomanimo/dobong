@@ -48,7 +48,7 @@ public class NaverMapServlet extends HttpServlet {
 			}
 	
 			
-			System.out.println(buffer.toString());
+//			System.out.println(buffer.toString());
 //			
 //			JSONParser parser=new JSONParser();
 //			JSONObject obj=(JSONObject)parser.parse(br.toString());
