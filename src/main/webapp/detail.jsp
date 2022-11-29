@@ -13,6 +13,12 @@
 			src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z3no9rza2g"></script>
 		<script type="text/javascript"
 			src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bm5xtq2mgp&submodules=geocoder"></script>
+		<!-- anychart v8 -->
+		<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    	<script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+		
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		
 		<style type="text/css">
 		td {
 			border: 1px solid #ccc;
@@ -23,7 +29,7 @@
 			height: 150px;
 		}
 		</style>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		
 	</head>
 	<body>
 	
@@ -32,8 +38,7 @@
 			<c:forEach items="${detail }" var="detail">
 				<tr>
 					<td><img alt="1" src="${detail.getImageurl() }"></td>
-					<!--  <td> <img alt="1" src="${detail.getImageurl() }"> </td>
-							<td> <img alt="1" src="${detail.getImageurl() }"> </td> -->
+
 				</tr>
 				<tr>
 					<td colspan="3">${detail.getDetailpage() }${detail.getNumber() }
@@ -89,42 +94,27 @@
 						console.log(log);
 					}
 				});
+				//11/23 getText 추가
 				function getText(text, count){
+					var data=new Array();
 					for(var i=0; i<text.length; i++){
 						console.log(text[i].firstChild.data);
 						console.log(count[i].firstChild.data);
+						var arr=new Object();
+						arr.x=text[i].firstChild.data;
+						arr.value=count[i].firstChild.data;
+						data.push(arr);
+						}
+						
+						console.log(data);
+						anychart.onDocumentReady(function () {
+					        var chart = anychart.tagCloud(data);
+					        chart.angles([0]);
+					        chart.container("container");
+					        // chart.getCredits().setEnabled(false);
+					        chart.draw();
+					      }); 
 					}
-				</form>
-			</tr>
-
-			<tr>
-				<td colspan="3"><br>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-
-	<div id="map" style="width: 100%; height: 400px;"></div>
-	<div id="map" style="width: 100%; height: 400px;"></div>
-	<script>
-	
-			var td=document.getElementsByTagName("td")[3];
-			var number=td.getElementsByTagName("input")[2].value;
-			$.ajax({
-				url:"GetTextmining?number="+number,
-				method:"GET",
-				async:true,
-				success:function(data){
-					var text=data.getElementsByTagName("text");
-					var count=data.getElementsByTagName("count");
-					getText(text,count);
-				},
-				error:function(log){
-					console.log("error");
-					console.log(log);
-				}
-				
-	
 				//====================
 				//지도 api 서비스 환경등록에 → Web 서비스 URL→  http://localhost을 추가해야 사용가능
 				//====================
@@ -158,6 +148,7 @@
 					}
 				});
 				var infoWindow=new naver.maps.InfoWindow();
+				
 				function markerClick(addr, roadaddr){
 					
 					var jibun=[
