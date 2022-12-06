@@ -6,6 +6,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>랜드마크 이미지 수정</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 		<style>
 			img{
 				width:150px;

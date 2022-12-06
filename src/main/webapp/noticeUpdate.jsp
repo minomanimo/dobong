@@ -6,6 +6,8 @@
 		<head>
 		<meta charset="UTF-8">
 		<title>게시글 수정페이지</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 	</head>
 	<body>
 		<h1>게시글 수정페이지</h1>

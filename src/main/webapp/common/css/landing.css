@@ -1,11 +1,16 @@
 @charset "EUC-KR";
 
 /*=======슬라이더 부분======= */
+a{
+	text-decoration: none;
+	color: black;
+}
 .slide{
-	visibility:hidden;
+	/*visibility:hidden;  */
 	position:absolute;
 	transform:translateY(-50);
 	top:50%;
+	left:350px;
 	width: 80vw;
 	display: inline-block;
 	margin: 0 auto;	
@@ -82,4 +87,50 @@
 #logo img{
 	width: 15%;
 	padding-top: 20px;
+}
+
+/*=====메뉴======*/
+#menu {
+	background-color: black;
+	height: 100px;
+}
+
+#menu a{
+	display: inline-block;
+	padding: 10px;
+	font-weight: bold;
+	color: white;
+}
+
+/*=======카테고리=============*/
+.category_menu li{
+	padding-left:20px;
+	list-style: none;
+}
+.category_menu li a{
+	font-size: 25px;
+}
+.category_place {
+	/*  visibility: hidden;*/
+	position: relative;
+	left: 120px;
+	top: -50px;
+	display: none;
+}
+.business{
+	display: block; 
+}
+.category_menu:hover .category_place{
+	display: block;
+}
+
+
+.category_menu ul:hover li {
+	border-bottom: 3px solid black;
+}
+
+
+/*=========사이드메뉴============*/
+#category{
+	display: inline-block;
 }

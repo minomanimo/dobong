@@ -6,6 +6,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>장소 수정</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 		<script type="text/javascript"
 			src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z3no9rza2g"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

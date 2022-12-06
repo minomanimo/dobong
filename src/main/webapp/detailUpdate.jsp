@@ -6,6 +6,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>수정 페이지</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 		<style>
 			td{
 				border:1px solid black;

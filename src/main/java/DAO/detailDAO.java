@@ -16,17 +16,16 @@ public class detailDAO {
 	}
 	
 	//연결처리 메서드 getConn
-		public static Connection getConn() throws Exception{
-			Connection conn=null;
-			String url="jdbc:mysql://127.0.0.1:3306/dobong";	//DB 변경
-			String id="root";
-			String pw="iotiot";
-			String driver="com.mysql.cj.jdbc.Driver";
-			Class.forName(driver);
-			conn=DriverManager.getConnection(url, id, pw);
-			return conn;
-		}
-		
+	public static Connection getConn() throws Exception{
+		Connection conn=null;
+		String url="jdbc:mysql://127.0.0.1:3306/dobong";	//DB 변경
+		String id="root";
+		String pw="iotiot";
+		String driver="com.mysql.cj.jdbc.Driver";
+		Class.forName(driver);
+		conn=DriverManager.getConnection(url, id, pw);
+		return conn;
+	}
 		
 		//커넥션 연결해제 처리 메서드
 		public static void close(Connection conn, Statement stmt, ResultSet rs) {

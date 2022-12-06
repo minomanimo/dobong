@@ -5,6 +5,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>회원정보 수정</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 		<style>
 		      a {
 		        text-decoration: none;

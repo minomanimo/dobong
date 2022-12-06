@@ -6,6 +6,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>메인</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 	</head>
 	<body>
 	<h1>${shortpage[3].shortpage}</h1>

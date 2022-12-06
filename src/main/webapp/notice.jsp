@@ -6,6 +6,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>공지사항</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 		<style>
 			a{
 			 text-decoration:none;
@@ -132,7 +134,7 @@
 			</c:forEach>
 		</ul> 
 		<br><a href="noticeWrite.jsp"> <input type="button" value="글쓰기"> </a>-->
-		<br><a href="index.jsp">홈으로</a>
+		<br><a href="landing.jsp">홈으로</a>
 		<script>
 			var record=document.getElementById("record").value;
 			var select=document.getElementsByTagName("option");

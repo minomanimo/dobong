@@ -18,4 +18,15 @@ $( document ).ready( function() {
             prevArrow: "<i class='prevArrow fa-regular fa-circle-left'></i>", 
             nextArrow: "<i class='nextArrow fa-regular fa-circle-right'></i>"
 	    });
+	    
+		
+	    const hoverTop=document.querySelector(".category_menu ul");	    
+	    const hoverMenu=document.querySelector(".business");
+	    hoverTop.addEventListener("click",  ()=>{
+			console.log("확인중입니다. ");
+			hoverMenu.style.display="block";
+			
+		});
+	    
+	    
 });
