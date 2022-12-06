@@ -69,6 +69,7 @@ public class MainDAO {
 			}
 		}catch(Exception e) {
 			System.out.println("getLandmarkImg() 실행중 오류발생 : "+e);
+			e.printStackTrace();
 		}finally {
 			MainDAO.close(conn, pstmt, rs);
 		}

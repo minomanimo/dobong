@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>관리자 페이지</title>
+		<link rel="icon" href="images/icon1.ico">
 		<style>
 			td{
 				border:1px solid black;

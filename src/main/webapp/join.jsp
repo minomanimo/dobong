@@ -5,6 +5,8 @@
 		<head>
 		<meta charset="utf-8">
 		<title>회원가입</title>
+		<!-- 아이콘 -->
+		<link rel="icon" href="images/icon1.ico">
 		<style type="text/css">
 			table, td{
 				border: 1px solid #ccc;
