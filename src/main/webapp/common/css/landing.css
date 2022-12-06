@@ -1,0 +1,85 @@
+@charset "EUC-KR";
+
+/*=======슬라이더 부분======= */
+.slide{
+	visibility:hidden;
+	position:absolute;
+	transform:translateY(-50);
+	top:50%;
+	width: 80vw;
+	display: inline-block;
+	margin: 0 auto;	
+	margin-top: -318px;;
+	margin-left: -14px;
+	background-color: transparent;
+}
+.slide .slideImg > img{
+	width: 80vw;
+	height: 750px;
+	/*위에 지정한 div 영역이랑 넓이가 같아야 함 그래야 이미지가 꽉차게 들어감*/
+	/*높이를 자식이 이미지에서 세팅  */
+}
+/*---버튼수정---*/
+.slide .prevArrow{
+	position: absolute;
+	padding-left:8px;
+	left: 0;
+	top: 50%;
+	transform:translateY(-50);
+	color: white;
+	z-index: 9;
+	font-size: 1.5em;
+	opacity: 0.7;
+}
+.slide .nextArrow{
+	position: absolute;
+	padding-right:8px;
+	right: 0;
+	top: 50%;
+	color: white;
+	z-index: 9;
+	transform:translateY(-50);
+	font-size: 1.5em;
+	opacity: 0.7;
+}
+/*하단 도트 수정 폰트어썸 Arrow 사용*/
+.slide li button {
+	 border: none;
+	 background: #d1d1d1;
+	 color: transparent;
+	 cursor: pointer;
+	 display: block;
+	 height: 8px;
+	 width: 8px;
+	 border-radius: 100%;
+	 padding: 0;
+	 width: 11px;
+	 height: 11px;
+} 
+.slide li {
+ 	 list-style: none;
+  	 cursor: pointer;
+ 	 display: inline-block;
+  	 margin: 0 6px;
+  	 padding: 0;
+}
+.slick-dots{
+	display: inline-block;
+  	vertical-align: middle;
+  	margin: auto 0;
+  	padding-left:450px;
+  	margin-top:-100px;
+  	opacity: 0.8;
+  	color: white;
+}
+.slick-dots li.slick-active button{
+	background-color: transparent;
+	border: 1px solid #ccc;
+	opacity: 0.7;
+} 
+
+/*=====로고 사이즈 수정=====*/
+#logo img{
+	width: 15%;
+	padding-top: 20px;
+}
